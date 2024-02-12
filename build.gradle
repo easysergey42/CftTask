@@ -1,15 +1,32 @@
 plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'java'
 }
 
 group = 'ru.nsu.burde'
-version = '1.0-SNAPSHOT'
+def mainClassName = 'ru.nsu.burde.Main'
+version '1.0'
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': "$mainClassName"
+        )
+    }
+    archiveBaseName.set('foo')
+}
+
+shadowJar {
+    archiveFileName = "util.${archiveExtension.get()}"
+//    destinationDirectory.set(file("D:/Java"))
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation 'commons-cli:commons-cli:1.6.0'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
 }
