@@ -14,9 +14,9 @@ public class Classifier {
     }
 
 
-    public ClassifiedType determineType(String s){
-
-    }
+//    public ClassifiedType determineType(String s){
+//
+//    }
 
     public static boolean isInteger(String in){
         return in.matches("-?\\d");
