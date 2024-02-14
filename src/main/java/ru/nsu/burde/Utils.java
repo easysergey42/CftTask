@@ -8,6 +8,14 @@ import java.util.List;
 
 public class Utils {
 
+    public enum DataTypes{
+        INTEGER,
+        FLOAT,
+        STRING
+    }
+
+
+
     public static void processInput(){
 
         List<BufferedReader> readers = new ArrayList<>();
