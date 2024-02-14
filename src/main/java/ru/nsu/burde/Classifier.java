@@ -1,13 +1,10 @@
 package ru.nsu.burde;
 
-import java.io.BufferedWriter;
-import java.io.Writer;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Classifier {
+
 
     public enum ClassifiedType{
         INTEGER,
@@ -15,11 +12,6 @@ public class Classifier {
         STRING
     }
 
-
-
-//    public ClassifiedType determineType(String s){
-//
-//    }
     public static ClassifiedType classifyString(String s){
         if (isInteger(s)) return ClassifiedType.INTEGER;
         if (isFloat(s)) return ClassifiedType.FLOAT;
@@ -28,7 +20,7 @@ public class Classifier {
 
     public static boolean isInteger(String in){
         try {
-            var x = new BigInteger(in);
+            new BigInteger(in);
             return true;
         } catch (Exception e) {
             return false;
@@ -37,7 +29,7 @@ public class Classifier {
 
     public static boolean isFloat(String in){
         try {
-            var x = new BigDecimal(in);
+            new BigDecimal(in);
             return true;
         } catch (Exception e) {
             return false;

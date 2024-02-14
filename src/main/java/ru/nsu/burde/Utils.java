@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Utils {
 
@@ -83,12 +82,17 @@ public class Utils {
                     else{
                         var t = Classifier.classifyString(line);
 
+                        if (Globals.sFlag){
+                            ShortStatistics.getInstance().take(t,line);
+                        }
+
                         writeToFile(t, line);
                     }
                 }
             }
             flushWriters();
             closeWriters();
+            System.out.println(ShortStatistics.getInstance());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -107,16 +111,6 @@ public class Utils {
             Globals.filePrefix = cmd.getOptionValue("p", "");
 
             Globals.inputFileNames = cmd.getArgs();
-//            System.out.println(Arrays.toString(cmd.getOptions()));
-//            File theDir = new File(Globals.outputPath);
-//            if (!Globals.outputPath.equals("") && !theDir.exists()){
-//                if (!theDir.mkdirs()){
-//                    throw new IOException("Failed to create directory " + Globals.outputPath);
-//                }
-//            }
-//            if (!Globals.outputPath.equals("")){
-//                Globals.outputPath += File.separator;
-//            }
 
         } catch (ParseException e) {
             System.err.println(e.getMessage());

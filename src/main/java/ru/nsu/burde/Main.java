@@ -1,9 +1,6 @@
 package ru.nsu.burde;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.HashMap;
 
 public class Main {
 
