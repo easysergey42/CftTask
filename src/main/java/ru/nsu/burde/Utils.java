@@ -1,11 +1,15 @@
 package ru.nsu.burde;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Utils {
 
+    private static final Pattern intPattern = Pattern.compile("[-+]?\\d+");
+    private static final Matcher intMatcher = intPattern.matcher("");
+    private static final Pattern floatPattern = Pattern.compile("[-+]?([0-9]*[.])?[0-9]+([eE][-+]?\\d+)?");
 
+    private static final Matcher floatMatcher = floatPattern.matcher("");
 
     public enum ClassifiedType{
         INTEGER,
@@ -20,20 +24,12 @@ public class Utils {
     }
 
     public static boolean isInteger(String in){
-        try {
-            new BigInteger(in);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        intMatcher.reset(in);
+        return intMatcher.matches();
     }
 
     public static boolean isFloat(String in){
-        try {
-            new BigDecimal(in);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        floatMatcher.reset(in);
+        return floatMatcher.matches();
     }
 }
