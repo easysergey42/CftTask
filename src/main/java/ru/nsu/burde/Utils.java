@@ -7,7 +7,7 @@ public class Utils {
 
     private static final Pattern intPattern = Pattern.compile("[-+]?\\d+");
     private static final Matcher intMatcher = intPattern.matcher("");
-    private static final Pattern floatPattern = Pattern.compile("[-+]?([0-9]*[.])?[0-9]+([eE][-+]?\\d+)?");
+    private static final Pattern floatPattern = Pattern.compile("[-+]?\\d*[.]\\d*([eE][-+]?\\d+)?");
 
     private static final Matcher floatMatcher = floatPattern.matcher("");
 
@@ -30,6 +30,6 @@ public class Utils {
 
     public static boolean isFloat(String in){
         floatMatcher.reset(in);
-        return floatMatcher.matches();
+        return (!in.equals(".") && floatMatcher.matches());
     }
 }

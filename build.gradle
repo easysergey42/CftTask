@@ -1,5 +1,4 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '7.1.2'
     id 'java'
 }
 
@@ -13,10 +12,12 @@ jar {
                 'Main-Class': "$mainClassName"
         )
     }
-}
 
-shadowJar {
-    archiveFileName = "util.${archiveExtension.get()}"
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    archiveBaseName = "util"
+    archiveVersion = ""
 }
 
 repositories {

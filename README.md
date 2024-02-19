@@ -13,11 +13,11 @@ ___
 
 1) для linux/macOS
 ```console
-./gradlew shadowJar
+./gradlew jar
 ```
 2) для Windows
 ```console
-./gradlew.bat shadowJar
+./gradlew.bat jar
 ```
 
 util.jar будет лежать в ./build/libs
