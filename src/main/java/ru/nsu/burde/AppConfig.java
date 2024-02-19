@@ -57,5 +57,4 @@ public class AppConfig {
         this.inputFileNames = inputFileNames;
     }
 
-//    public Map<Classifier.ClassifiedType, String> typeToFileName;
 }

@@ -11,9 +11,6 @@ public class Main {
 
         var conf = new CommandLineArgumentsParser().parse(args);
 
-//        conf.setAFlag(false);
-//        conf.setStatisticsType(AppConfig.StatisticsType.FULL);
-
         Statistician statistician = switch(conf.getStatisticsType()){
             case NONE -> new NoneStatistician();
             case SHORT -> new ShortStatistician();

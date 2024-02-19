@@ -4,21 +4,11 @@ plugins {
 }
 
 group = 'ru.nsu.burde'
-def mainClassName = 'ru.nsu.burde.Main'
 version '1.0'
 
-jar {
-    manifest {
-        attributes(
-                'Main-Class': "$mainClassName"
-        )
-    }
-    archiveBaseName.set('foo')
-}
 
 shadowJar {
     archiveFileName = "util.${archiveExtension.get()}"
-//    destinationDirectory.set(file("D:/Java"))
 }
 
 repositories {

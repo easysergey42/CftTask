@@ -20,10 +20,10 @@ public class ShortStatistician implements Statistician {
 
     @Override
     public String toString() {
-        return "Краткая статистика:\n" +
-                "Количество целых чисел: " + intCount +
-                "\nКоличество вещественных чисел: " + floatCount +
-                "\nКоличество строк: " + stringCount +
+        return "\nShort statistics:" +
+                "\nNumber of integers: " + intCount +
+                "\nNumber of floats: " + floatCount +
+                "\nNumber of strings: " + stringCount +
                 '\n';
     }
 }

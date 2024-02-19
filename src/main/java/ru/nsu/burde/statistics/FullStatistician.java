@@ -4,7 +4,6 @@ import ru.nsu.burde.Utils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.Objects;
 
 public class FullStatistician extends ShortStatistician {
 
@@ -44,25 +43,25 @@ public class FullStatistician extends ShortStatistician {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("\nПолная статистика:");
-        sb.append("\nКоличество целых чисел: ").append(intCount);
+        StringBuilder sb = new StringBuilder("\nFull statistics:");
+        sb.append("\nNumber of integers: ").append(intCount);
         if (intCount > 0){
-            sb.append("\n\tМинимальное целое число: ").append(intMin);
-            sb.append("\n\tМаксимальное целое число: ").append(intMax);
-            sb.append("\n\tСумма целых чисел: ").append(intSum);
-            sb.append("\n\tСреднее значение целых чисел: ").append(new BigDecimal(intSum).multiply(BigDecimal.valueOf(1D/intCount)));
+            sb.append("\n\tMinimum integer: ").append(intMin);
+            sb.append("\n\tMaximum integer: ").append(intMax);
+            sb.append("\n\tSum of integers: ").append(intSum);
+            sb.append("\n\tAverage of integers: ").append(new BigDecimal(intSum).multiply(BigDecimal.valueOf(1D/intCount)));
         }
-        sb.append("\nКоличество вещественных чисел: ").append(floatCount);
+        sb.append("\nNumber of floats: ").append(floatCount);
         if (floatCount > 0){
-            sb.append("\n\tМинимальное вещественное число: ").append(floatMin);
-            sb.append("\n\tМаксимальное вещественное число: ").append(floatMax);
-            sb.append("\n\tСумма вещественных чисел: ").append(floatSum);
-            sb.append("\n\tСреднее значение вещественных чисел: ").append(floatSum.multiply(BigDecimal.valueOf(1D/floatCount)));
+            sb.append("\n\tMinimum float: ").append(floatMin);
+            sb.append("\n\tMaximum float: ").append(floatMax);
+            sb.append("\n\tSum of flats: ").append(floatSum);
+            sb.append("\n\tAverage of floats: ").append(floatSum.multiply(BigDecimal.valueOf(1D/floatCount)));
         }
-        sb.append("\nКоличество строк: ").append(stringCount);
+        sb.append("\nNumber of strings: ").append(stringCount);
         if (stringCount > 0){
-            sb.append("\n\tРазмер самой короткой строки: ").append(minLength);
-            sb.append("\n\tРазмер самой длинной строки: ").append(maxLength);
+            sb.append("\n\tSize of the shortest line: ").append(minLength);
+            sb.append("\n\tSize of the longest line: ").append(maxLength);
         }
         sb.append('\n');
         return sb.toString();
