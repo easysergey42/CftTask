@@ -84,7 +84,7 @@ public class FileProcessor {
                         iter.remove();
                     }
                     else{
-                        var t = Utils.classifyString(line);
+                        Utils.ClassifiedType t = Utils.classifyString(line);
 
                         statistician.take(t, line);
 
