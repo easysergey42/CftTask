@@ -1,119 +1,39 @@
 package ru.nsu.burde;
 
-import org.apache.commons.cli.*;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class Utils {
 
 
-    private static List<BufferedReader> readers;
-    private static Map<Classifier.ClassifiedType, BufferedWriter> writers = new HashMap<>();
 
-    private static void setWriters(){
-        writers = new HashMap<>();
-        for (Classifier.ClassifiedType key : Classifier.ClassifiedType.values()) {
-            writers.put(key, null);
-        }
+    public enum ClassifiedType{
+        INTEGER,
+        FLOAT,
+        STRING
     }
 
-    private static void flushWriters() throws IOException {
-        for (BufferedWriter value : writers.values()) {
-            if (value != null){
-                value.flush();
-            }
-        }
+    public static ClassifiedType classifyString(String s){
+        if (isInteger(s)) return ClassifiedType.INTEGER;
+        if (isFloat(s)) return ClassifiedType.FLOAT;
+        return ClassifiedType.STRING;
     }
 
-    private static void closeWriters() throws IOException {
-        for (BufferedWriter value : writers.values()) {
-            if (value != null){
-                value.close();
-            }
-        }
-    }
-
-    private static void setReaders(String[] inputFileNames){
-        readers = new ArrayList<>();
-        for (var file :
-                inputFileNames) {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
-                readers.add(reader);
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
-        }
-    }
-
-    private static void writeToFile(Classifier.ClassifiedType type, String value) throws IOException {
-        var writer = writers.getOrDefault(type, null);
-        if (writer == null){
-            File dir = new File(Globals.outputPath);
-            if (!dir.exists()) dir.mkdirs();
-            File f = new File(dir, Globals.filePrefix + Globals.typeToFileName.get(type));
-
-            writer = new BufferedWriter(new FileWriter(f, StandardCharsets.UTF_8));
-            writers.put(type, writer);
-        }
-        writer.write(value);
-        writer.newLine();
-    }
-
-    public static void processInput() {
-        setReaders(Globals.inputFileNames);
-
-
+    public static boolean isInteger(String in){
         try {
-            while (!readers.isEmpty()) {
-                var iter = readers.listIterator();
-                while (iter.hasNext()){
-                    var reader = iter.next();
-                    String line = reader.readLine();
-                    if (line == null){
-                        reader.close();
-                        iter.remove();
-                    }
-                    else{
-                        var t = Classifier.classifyString(line);
-
-                        if (Globals.sFlag){
-                            ShortStatistics.getInstance().take(t,line);
-                        }
-
-                        writeToFile(t, line);
-                    }
-                }
-            }
-            flushWriters();
-            closeWriters();
-            System.out.println(ShortStatistics.getInstance());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            new BigInteger(in);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 
-    public static void parseCommandLineArgs(String[] args){
-        Options options = new Options();
-        options.addOption("o", true, "Path to results");
-        options.addOption("p", true, "Prefix of output files");
-
-        CommandLineParser parser = new DefaultParser();
+    public static boolean isFloat(String in){
         try {
-            CommandLine cmd = parser.parse(options, args);
-
-            Globals.outputPath = cmd.getOptionValue("o", "");
-            Globals.filePrefix = cmd.getOptionValue("p", "");
-
-            Globals.inputFileNames = cmd.getArgs();
-
-        } catch (ParseException e) {
-            System.err.println(e.getMessage());
+            new BigDecimal(in);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }
